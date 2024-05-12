@@ -1,11 +1,16 @@
 {% extends "website/base.html" %}
 
-<div class="container">
-
     {% block content %}
-    
-    <h1>Home</h1>
+
+    {% if user.is_authenticated %}
+
+    <h1>Домашняя</h1>
+
+    {% else %}
+
+    <p>jqwoirjoqiwrjoiqwrjhrowhi</p>
+
+    {% endif %}
 
     {% endblock content %}
 
-</div>
