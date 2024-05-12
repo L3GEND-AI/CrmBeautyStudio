@@ -1,0 +1,26 @@
+[
+    {
+        "model": "website.categoryservices",
+        "pk": 1,
+        "fields": {
+            "name_category": "Прически",
+            "slug": "pricheski"
+        }
+    },
+    {
+        "model": "website.categoryservices",
+        "pk": 2,
+        "fields": {
+            "name_category": "Лечебные процедуры",
+            "slug": "Lechebnye-procedury"
+        }
+    },
+    {
+        "model": "website.categoryservices",
+        "pk": 5,
+        "fields": {
+            "name_category": "Окрашивание",
+            "slug": "okrashivanie"
+        }
+    }
+]

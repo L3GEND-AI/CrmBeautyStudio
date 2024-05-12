@@ -1,0 +1,178 @@
+[
+    {
+        "model": "website.services",
+        "pk": 1,
+        "fields": {
+            "name_service": "Мужская прическа 1 насадка",
+            "price": "700.00",
+            "category_service": 1,
+            "description": null,
+            "slug": "Muzhskaya-pricheska-1-nasadka"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 2,
+        "fields": {
+            "name_service": "Восстановление структуры волос",
+            "price": "1500.00",
+            "category_service": 2,
+            "description": null,
+            "slug": "Vosstanovlenie-struktury-volos"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 3,
+        "fields": {
+            "name_service": "Мелирование",
+            "price": "1000.00",
+            "category_service": 5,
+            "description": null,
+            "slug": "melirovanie"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 4,
+        "fields": {
+            "name_service": "Колорирование",
+            "price": "1100.00",
+            "category_service": 5,
+            "description": "использование нескольких разных оттенков",
+            "slug": "kolorirovanie"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 5,
+        "fields": {
+            "name_service": "Элюминирование",
+            "price": "1500.00",
+            "category_service": 5,
+            "description": "бесцветное окрашивание",
+            "slug": "elyuminirovanie"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 6,
+        "fields": {
+            "name_service": "Деграде",
+            "price": "1300.00",
+            "category_service": 5,
+            "description": "горизонтальное окрашивание с плавным переходом вверх и вниз",
+            "slug": "degrade"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 7,
+        "fields": {
+            "name_service": "Скрытое окрашивание",
+            "price": "900.00",
+            "category_service": 5,
+            "description": "позволяет скрыть яркие пряди под шевелюрой",
+            "slug": "skrytoe-okrashivanie"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 8,
+        "fields": {
+            "name_service": "Двухцветное окрашивание",
+            "price": "1100.00",
+            "category_service": null,
+            "description": "разделение волос на две части и окрашивание каждой в контрастный цвет",
+            "slug": "dvuhcvetnoe-okrashivanie"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 9,
+        "fields": {
+            "name_service": "Мужская стрижка",
+            "price": "700.00",
+            "category_service": 1,
+            "description": "Сможете договориться о том, что Вам нужно",
+            "slug": "muzhskaya-strizhka"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 10,
+        "fields": {
+            "name_service": "Свадебная прическа",
+            "price": "1500.00",
+            "category_service": 1,
+            "description": "Лучший образ для лучшего дня",
+            "slug": "svadebnaya-pricheska"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 11,
+        "fields": {
+            "name_service": "Женская стрижка",
+            "price": "900.00",
+            "category_service": 1,
+            "description": null,
+            "slug": "zhenskaya-strizhka"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 12,
+        "fields": {
+            "name_service": "Детская стрижка",
+            "price": "500.00",
+            "category_service": 1,
+            "description": null,
+            "slug": "detskaya-strizhka"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 13,
+        "fields": {
+            "name_service": "Ботокс",
+            "price": "1000.00",
+            "category_service": 2,
+            "description": null,
+            "slug": "botoks"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 14,
+        "fields": {
+            "name_service": "Каутеризация",
+            "price": "1500.00",
+            "category_service": 2,
+            "description": null,
+            "slug": "kauterizaciya"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 15,
+        "fields": {
+            "name_service": "Ламинирование и экранирование",
+            "price": "1600.00",
+            "category_service": 2,
+            "description": null,
+            "slug": "laminirovanie-i-ekranirovanie"
+        }
+    },
+    {
+        "model": "website.services",
+        "pk": 16,
+        "fields": {
+            "name_service": "Коллагеновое восстановление волос",
+            "price": "1300.00",
+            "category_service": 2,
+            "description": null,
+            "slug": "kollagenovoe-vosstanovlenie-volos"
+        }
+    }
+]
