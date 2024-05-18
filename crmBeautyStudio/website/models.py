@@ -116,12 +116,14 @@ class User(AbstractUser):
 
 # Перенести в нечто подобное корзины
 class Reservation(models.Model):
-    time_reservation = models.DateTimeField()
+    time_reservation = models.TimeField()
+    date_reservation = models.DateField()
     id_service = models.ForeignKey(
         "Services", models.DO_NOTHING, db_column="id_service"
     )
     id_user = models.ForeignKey("User", models.DO_NOTHING, db_column="id_user")
     feedback = models.CharField(max_length=200, blank=True, null=True)
+    wishes = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=20)
 
     class Meta:
