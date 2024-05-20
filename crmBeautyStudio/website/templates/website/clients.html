@@ -1,0 +1,36 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+
+<h1>Клиенты</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Почта</th>
+      <th scope="col">Номер телефона</th>
+      <th scope="col">Процент скидки</th>
+      <th scope="col">Дата создания</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if users %}
+        {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.first_name}}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.PhoneNumber }}</td>
+        <td>{{ user.discount }}</td>
+        <td>{{ user.date_joined }}</td>
+    </tr>
+        {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+
+{% endblock content %}
