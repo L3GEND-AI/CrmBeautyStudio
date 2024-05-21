@@ -1,0 +1,19 @@
+{% extends "website/base.html" %} 
+{% load static %} 
+{% block content %}
+
+<h1>Запись</h1>
+
+<div class="card w-75 mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+    <p class="card-text"> Почта: {{ user.email }}</p>
+    <p class="card-text"> Телефон: {{ user.PhoneNumber }}</p>
+    <p class="card-text"> Накопительная скидка: {{ user.discount }}</p>
+    <p class="card-text"> Дата регистрации: {{ user.date_joined }}</p>
+  </div>
+</div>
+
+<a href="{% url "clients" %}" class="btn btn-primary">Button</a>
+
+{% endblock content %}

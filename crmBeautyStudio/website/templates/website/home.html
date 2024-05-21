@@ -1,14 +1,25 @@
 {% extends "website/base.html" %}
+{% load static %}
 
     {% block content %}
 
     {% if user.is_authenticated %}
 
-    <h1>Домашняя</h1>
+    <main class="homepage-not-logged">
+
+        <h1>Домашняя</h1>
+
+    </main>
 
     {% else %}
 
-    <p>jqwoirjoqiwrjoiqwrjhrowhi</p>
+    <main class="homepage-not-logged">
+
+        <h1 class="main-text">Добро пожаловать в систему управления клиентами студии красоты "Я&Ты"</h1>
+
+        <p class="main-text">Пожалуйста авторизуйтесь для просмотра этой страницы</p>
+
+    </main>
 
     {% endif %}
 

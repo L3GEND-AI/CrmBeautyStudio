@@ -17,19 +17,21 @@
     </tr>
   </thead>
   <tbody>
-    {% if users %}
-        {% for user in users %}
-    <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.first_name}}</td>
+    {% for user in users %}
+      <tr>
+        <td>
+          <a href="{% url 'record' user.id %}">{{ user.id }}</a>
+        </td>
+        <td>
+          <a href="{% url 'record' user.id %}">{{ user.first_name }}</a>
+        </td>
         <td>{{ user.last_name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.PhoneNumber }}</td>
         <td>{{ user.discount }}</td>
         <td>{{ user.date_joined }}</td>
-    </tr>
-        {% endfor %}
-    {% endif %}
+      </tr>
+    {% endfor %}
   </tbody>
 </table>
 

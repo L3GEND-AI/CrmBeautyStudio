@@ -1,21 +1,23 @@
 {% extends "website/base.html" %}
+{% load static %}
 
 {% block content %}
 
-<div class="container">
+<div class="container flex">
 
     <form action="{% url "login" %}" method="post">
         {% csrf_token %}
 
         <div class="mb-3">
-          <label class="form-label">Логин</label>
-          <input type="text" class="form-control" name="username" placeholder="User123" required>
+          <h1 class="AuthRegText-h1">Вход в систему</h1>
+          <label class="label-main">Логин</label>
+          <input type="text" class="inputs form-control" name="username" placeholder="Логин" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">Пароль</label>
-          <input type="password" class="form-control" name="password" placeholder="Pass123" required>
+          <label class="label-main">Пароль</label>
+          <input type="password" class="inputs form-control" name="password" placeholder="Пароль" required>
         </div>
-        <button type="submit" class="btn btn-primary">Войти</button>
+        <button type="submit" class="button-login">Войти</button>
       </form>
 
 </div>

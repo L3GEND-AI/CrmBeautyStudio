@@ -1,39 +1,25 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg">
+<nav class="navigation">
   <div class="container-fluid">
       <a class="navbar-brand" href="{% url "home" %}">
         <img src="{% static "deps/img/logo.svg" %}" alt="logo">
       </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+
+    <div class="navigation-links">
 
         {% if user.is_authenticated %}
 
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "clients" %}">Клиенты</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Услуги</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Профиль</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "logout" %}">Выйти</a>
-          </li>
+            <a class="navigation_item" href="{% url "clients" %}">Клиенты</a>
+            <a class="navigation_item" href="{% url "services" %}">Услуги</a>
+            <a class="navigation_item" href="#">Профиль</a>
+            <a class="navigation_item" href="{% url "logout" %}">Выйти</a>
 
           {% else %}
 
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "login" %}">Войти</a>
-          </li>
+            <a class="navigation_item" href="{% url "login" %}">Войти</a>
 
         {% endif %}
-      </ul>
     </div>
   </div>
 </nav>
