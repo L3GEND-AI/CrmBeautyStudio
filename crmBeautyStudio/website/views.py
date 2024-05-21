@@ -1,7 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.urls import reverse
 from .models import User
+from .models import CategoryServices, Services
 
 
 def home(request):
@@ -35,10 +37,15 @@ def clientsList(request):
     users = User.objects.all()
     return render(request, "website/clients.html", {"users": users})
 
-def userdata(request, pk):
+def servicesList(request):
+    services = Services.objects.all()
+    return render(request, "website/services.html", {"services": services})
+
+def record(request, pk):
     if request.user.is_authenticated:
-        user = User.objects.get(id=pk)
-        return render(request, "website/userdata.html", {"user": user})
+        record = get_object_or_404(User, pk=pk)
+        print(f"Record found: {record}, ID: {record.id}")
+        return render(request, "website/record.html", {"record": record})
     else:
         messages.error(request, "Вы должны авторизоваться для просмотра данной страницы")
         return redirect("home")
