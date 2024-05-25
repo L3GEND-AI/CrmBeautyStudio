@@ -23,7 +23,9 @@ def loginuser(request):
             messages.success(request, "Вы успешно вошли в систему")
             return redirect("home")
         else:
-            messages.error(request, "Возникла ошибка при входе. Проверьте введенные данные.")
+            messages.error(
+                request, "Возникла ошибка при входе. Проверьте введенные данные."
+            )
     else:
         return render(request, "website/login.html")
 
@@ -33,13 +35,12 @@ def logoutuser(request):
     messages.success(request, "Вы успешно вышли из системы.")
     return redirect("home")
 
+
 def clientsList(request):
     users = User.objects.all()
-    return render(request, "website/clients.html", {"users": users})
+    user_count = User.objects.count()
+    return render(request, "website/clients.html", {"users": users, 'user_count': user_count})
 
-def servicesList(request):
-    services = Services.objects.all()
-    return render(request, "website/services.html", {"services": services})
 
 def record(request, pk):
     if request.user.is_authenticated:
@@ -47,5 +48,12 @@ def record(request, pk):
         print(f"Record found: {record}, ID: {record.id}")
         return render(request, "website/record.html", {"record": record})
     else:
-        messages.error(request, "Вы должны авторизоваться для просмотра данной страницы")
+        messages.error(
+            request, "Вы должны авторизоваться для просмотра данной страницы"
+        )
         return redirect("home")
+
+
+def servicesList(request):
+    services = Services.objects.all()
+    return render(request, "website/services.html", {"services": services})
