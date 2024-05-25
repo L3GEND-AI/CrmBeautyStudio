@@ -11,15 +11,218 @@
     src: url("../fonts/MontserratAlternates-Regular.ttf");
 }
 
+/* ul{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Comfortaa-Regular;
+}
+
+nav{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    background-color: #F8E8EE;
+    width: 90px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.a-nav{
+    position: relative;
+    color:white;
+    font-size: 14px;
+    display: table;
+    width: 300px;
+    padding: 10px;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.fas{
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.logo{
+    text-align: center;
+    display: flex;
+    transition: all 0.5s ease;
+}
+
+.logo img{
+    width: 85px;
+    height: 85px;
+}
+
+.nav-item{
+    position: relative;
+    top: 12px;
+    margin-left: 10px;
+}
+
+a:hover{
+    background: #F8E8EE;
+}
+
+nav:hover{
+    width: 280px;
+    transition: all 0.5s ease;
+}
+
+.logout{
+    position: absolute;
+    bottom: 0;
+}
+ */
+
+body{
+    background-image: url("../img/background2.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Таблицы */
+
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #8E8FBF;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 1px solid #D8CFE2;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.custom-thead th {
+    background-color: #657BB5;
+    color: #fff;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #D8CFE2;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #C7ADD0;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #CDCFE7;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.table-link {
+    color: #657BB5;
+    text-decoration: none;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.table-link:hover {
+    color: #8E8FBF;
+    text-decoration: underline;
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+/* Конец стилей таблицы */
+
+/* Навбар */
+
+.custom-navbar,
+.custom-navbar .navbar-nav .nav-link,
+.custom-navbar .navbar-brand {
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.custom-navbar {
+    background-color: #D8CFE2;
+    border-bottom: 2px solid #8E8FBF;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #657BB5;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #8E8FBF;
+}
+
+/* .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23657BB5' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+} */
+
+.nav-item.active .nav-link {
+    color: #C7ADD0 !important;
+}
+
+/* Конец навбара */
+
+/* Карточка клиента */
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    font-family: 'Comfortaa', sans-serif;
+    border-radius: 20px;
+    padding: 0.75rem 1.5rem;
+    background-color: #657BB5;
+    border-color: #657BB5;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #8E8FBF;
+    border-color: #8E8FBF;
+}
+
+/* Конец карточка клиента */
+
+.p-client-count{
+    font-family: 'Comfortaa-Regular';
+    font-size: 14px;
+}
+
 .navigation_item{
     height: 20px;
     width: 100%;
     align-content: center;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     color: black;
     text-decoration: none;
-    font-family: Comfortaa-Regular;
+    font-family: 'Comfortaa-Regular';
 }
 
 .navigation_item_login{
@@ -30,49 +233,104 @@
     font-size: 20px;
     color: black;
     text-decoration: none;
-    font-family: Comfortaa-Regular;
+    font-family: 'Comfortaa-Regular';
 }
 
 h1{
-    font-family: MontserratAlternates-Regular;
+    font-family: 'Comfortaa-Regular', sans-serif;
+    color: #D8CFE2;
 }
 
-.homepage-not-logged{
-    /* margin-top: 10px;
-    margin-inline-start: 10px;
-    margin-inline-end: 10px;
-    margin-bottom: 10px; */
-
-    min-height: 900px;
+/* .homepage{
+    margin: 0;
     background-image: url("../img/background2.svg");
-    background-size: cover;
-    background-position: center;
+    background-size: auto;
     align-content: center;
-}
+} */
 
-.AuthRegText-h1{
-    display: flex;
+/* Начало логина */
+
+.AuthRegText-h1 {
+    color: #657BB5;
+    font-size: 40px;
     margin-top: 15px;
     margin-bottom: 15px;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
-    font-family: Comfortaa-Regular;
+    display: flex;
 }
-
-.button-login{
+.label-main {
+    font-family: 'Comfortaa-Regular', sans-serif;
+    color: #8E8FBF;
+}
+.form-control {
+    border-radius: 0.5rem;
+}
+.button-login {
+    background-color: #F8E8EE;
+    color: black;
+    border: none;
+    padding: 0.75rem 1.5rem;
     border-radius: 20px;
+    font-size: 14px;
+    font-family: 'Comfortaa-Regular', sans-serif;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
     width: 200px;
     height: 40px;
-    background-color: #F8E8EE;
-    border: 0px;
-    font-size: 14px;
-    color: black;
-    font-family: Comfortaa-Regular;
-    margin: 10px;
-    align-items: center;
-    justify-content: center;
 }
+.button-login:hover {
+    background-color: #E1D4DB;
+}
+.bg-white {
+    border-radius: 15px;
+}
+
+/* Конец логина */
+
+/* Начало домашней */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.homepage {
+    background-color: #FFFFFF;
+    padding: 2rem 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    animation: fadeIn 1s ease-in-out;
+}
+.btn-primary, .btn-secondary {
+    font-family: 'Comfortaa-Regular', sans-serif;
+    border-radius: 20px;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #8E8FBF;
+    border-color: #8E8FBF;
+}
+.btn-secondary:hover {
+    background-color: #657BB5;
+    border-color: #657BB5;
+}
+
+/* Конец домашней */
 
 .main-text{
     font-size: 50px;
@@ -80,27 +338,21 @@ h1{
     line-height: 100px;
     color: white;
     align-items: center;
-    text-align: center;  
+    text-align: center;
 }
 
 .navigation-links {
-    display: flex;
-    flex-grow: 1;
     justify-content: space-around;
     align-items: center;
 }
 
 .navigation {
-    background-color: #F8E8EE;
+    background-color: #677CB5;
     height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-}
-
-.label-main{
-    font-family: Comfortaa-Regular;
 }
 
 .inputs{
@@ -111,3 +363,4 @@ h1{
     justify-content: center;
     align-items: center;
 }
+
