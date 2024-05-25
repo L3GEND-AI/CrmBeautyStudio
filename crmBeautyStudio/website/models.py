@@ -113,8 +113,6 @@ class User(AbstractUser):
     def __str__(self):
         return self.username.__str__()
 
-
-# Перенести в нечто подобное корзины
 class Reservation(models.Model):
     time_reservation = models.TimeField()
     date_reservation = models.DateField()
