@@ -209,6 +209,23 @@ body{
 
 /* Конец карточка клиента */
 
+/* Профиль */
+
+.profile-header img {
+    border: 5px solid #8E8FBF;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title i {
+    margin-right: 10px;
+}
+
+/* Конец профиля */
+
 .p-client-count{
     font-family: 'Comfortaa-Regular';
     font-size: 14px;
@@ -239,6 +256,10 @@ body{
 h1{
     font-family: 'Comfortaa-Regular', sans-serif;
     color: #D8CFE2;
+}
+
+p{
+    font-family: 'Comfortaa-Regular', sans-serif;
 }
 
 /* .homepage{
