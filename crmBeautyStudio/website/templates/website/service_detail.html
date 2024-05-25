@@ -1,0 +1,17 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h1 class="card-title">{{ service.name_service }}</h1>
+            <p class="card-text"><strong>Цена:</strong> {{ service.price }} ₽</p>
+            <p class="card-text"><strong>Категория:</strong> {{ service.category_service.name_category }}</p>
+            <p class="card-text"><strong>Описание:</strong> {{ service.description }}</p>
+        </div>
+    </div>
+    <a href="{% url 'edit_service' service.pk %}" class="btn btn-secondary">Редактировать</a>
+    <a href="{% url 'services' %}" class="btn btn-primary">Назад</a>
+</div>
+{% endblock content %}
