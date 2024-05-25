@@ -1,27 +1,16 @@
 {% extends "website/base.html" %}
 {% load static %}
 
-    {% block content %}
-
+{% block content %}
+<main class="homepage container d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 80vh;">
     {% if user.is_authenticated %}
-
-    <main class="homepage-not-logged">
-
-        <h1>Домашняя</h1>
-
-    </main>
-
+        <h1 class="display-4" style="color: #657BB5;">Добро пожаловать, {{ user.first_name }}!</h1>
+        <p class="lead" style="color: #8E8FBF;">Вы можете использовать меню для навигации по сайту.</p>
     {% else %}
-
-    <main class="homepage-not-logged">
-
-        <h1 class="main-text">Добро пожаловать в систему управления клиентами студии красоты "Я&Ты"</h1>
-
-        <p class="main-text">Пожалуйста авторизуйтесь для просмотра этой страницы</p>
-
-    </main>
-
+        <h1 class="display-4" style="color: #657BB5;">Добро пожаловать в систему управления клиентами студии красоты "Я&Ты"</h1>
+        <p class="lead" style="color: #8E8FBF;">Пожалуйста авторизуйтесь для просмотра этой страницы</p>
+        <a class="btn btn-primary mt-3" href="{% url 'login' %}" style="background-color: #657BB5; border-color: #657BB5;">Войти</a>
     {% endif %}
-
-    {% endblock content %}
+</main>
+{% endblock content %}
 
