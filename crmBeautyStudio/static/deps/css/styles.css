@@ -95,7 +95,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -147,6 +147,11 @@ body{
     color: #8E8FBF;
     text-decoration: underline;
     font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+.table-responsive {
+    max-height: 600px;
+    overflow: auto;
 }
 
 /* Конец стилей таблицы */
@@ -345,11 +350,16 @@ p{
     padding: 2rem 1.5rem;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+    max-width: 1800px;
+    width: 1600px;
+    max-height: none;
+    height: auto;
     margin: auto;
     margin-top: 50px;
+    margin-bottom: 20px;
     animation: fadeIn 1s ease-in-out;
 }
+
 .btn-primary, .btn-secondary, .btn-danger, .btn-warning {
     font-family: 'Comfortaa-Regular', sans-serif;
     border-radius: 20px;
