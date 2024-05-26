@@ -66,6 +66,7 @@ class Services(models.Model):
     slug = models.SlugField(
         max_length=200, unique=True, blank=True, null=True, verbose_name="Фрагмент URL"
     )
+    available = models.BooleanField(default=True, verbose_name='Доступность услуги')
 
     class Meta:
 
