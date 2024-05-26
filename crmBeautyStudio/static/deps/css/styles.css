@@ -255,7 +255,7 @@ body{
 
 h1{
     font-family: 'Comfortaa-Regular', sans-serif;
-    color: #D8CFE2;
+    color: #657BB5;
 }
 
 p{
@@ -336,7 +336,7 @@ p{
     margin-top: 50px;
     animation: fadeIn 1s ease-in-out;
 }
-.btn-primary, .btn-secondary {
+.btn-primary, .btn-secondary, .btn-danger {
     font-family: 'Comfortaa-Regular', sans-serif;
     border-radius: 20px;
     padding: 0.75rem 1.5rem;
@@ -349,6 +349,11 @@ p{
 .btn-secondary:hover {
     background-color: #657BB5;
     border-color: #657BB5;
+}
+
+.btn-danger:hover{
+    background-color: #C7ADD0;
+    border-color: #C7ADD0;
 }
 
 /* Конец домашней */
