@@ -1,22 +1,46 @@
 from django.http import JsonResponse
 from django.utils import timezone
+from datetime import date, timedelta
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import json
 from .forms import ServiceForm
 from .models import Reservation, User
 from .models import Services
 
 
 def home(request):
-    current_date = timezone.now().date()
+    # Количество клиентов
     user_count = User.objects.filter(is_staff=False).count()
-    today_reservations = Reservation.objects.filter(date_reservation=current_date)
+
+    # Записи на текущий день
+    today = date.today()
+    today_reservations = Reservation.objects.filter(date_reservation=today)
+
+    # Процент заполненности
+    total_slots = 100
+    occupancy_percentage = (today_reservations.count() / total_slots) * 100
+
+    # График записей на неделю
+    weekly_reservations_labels = []
+    weekly_reservations_data = []
+    for i in range(7):
+        day = today + timedelta(days=i)
+        weekly_reservations_labels.append(day.strftime('%d.%m'))
+        weekly_reservations_data.append(Reservation.objects.filter(date_reservation=day).count())
+
+    # Последние отзывы
+    recent_feedbacks = Reservation.objects.exclude(feedback__isnull=True).exclude(feedback__exact='').order_by('-date_reservation')[:5]
+
     context = {
-        "title": "Я&Ты - Главная",
-        "user_count": user_count,
-        "today_reservations": today_reservations,
+        'user_count': user_count,
+        'today_reservations': today_reservations,
+        'occupancy_percentage': occupancy_percentage,
+        'weekly_reservations_labels': json.dumps(weekly_reservations_labels),
+        'weekly_reservations_data': json.dumps(weekly_reservations_data),
+        'recent_feedbacks': [res.feedback for res in recent_feedbacks]
     }
     return render(request, "website/home.html", context)
 
