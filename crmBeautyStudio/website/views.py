@@ -57,7 +57,6 @@ def record(request, pk):
     reservations = Reservation.objects.filter(id_user=user)
     return render(request, "website/record.html", {"record": user, "reservations": reservations})
 
-
 @login_required
 def profile(request):
     return render(request, 'website/profile.html', {'user': request.user})

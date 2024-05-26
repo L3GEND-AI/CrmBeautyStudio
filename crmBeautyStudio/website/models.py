@@ -2,8 +2,6 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
-
-# Create your models here.
 class Gallery(models.Model):
     tittle = models.CharField(max_length=250, verbose_name="Заголовок")
     description = models.CharField(
@@ -19,7 +17,6 @@ class Gallery(models.Model):
     def __str__(self):
         return self.tittle.__str__()
 
-
 class Blognews(models.Model):
     tittle = models.CharField(max_length=50)
     description = models.CharField(max_length=250, blank=True, null=True)
@@ -28,7 +25,6 @@ class Blognews(models.Model):
 
     class Meta:
         db_table = "blognews"
-
 
 class CategoryServices(models.Model):
     name_category = models.CharField(max_length=50, verbose_name="Название")
@@ -42,11 +38,8 @@ class CategoryServices(models.Model):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
-    # Перегрзка функции __str__, что находится в наследуемом классе Model (Model записывается после точки при создании класса-модели таблицы)
-    # Всё это для отображения правильных названий в админке (категорий, например)
     def __str__(self):
         return self.name_category.__str__()
-
 
 class Services(models.Model):
     name_service = models.CharField(max_length=50, verbose_name="Название")
@@ -74,16 +67,9 @@ class Services(models.Model):
         verbose_name = "Услуга"
         verbose_name_plural = "Услуги"
 
-    # Перегрзка функции __str__, что находится в наследуемом классе Model (Model записывается после точки при создании класса-модели таблицы)
-    # Всё это для отображения правильных названий в админке (категорий, например)
     def __str__(self):
         return self.name_service.__str__()
 
-
-# Модель User в данном случае не создает таблицу, а  переопределяет таблицу auth_user, которая присутствует в Django по умолчанию.
-# Тут мы добавляем необходимые поля дополнительно!
-# Для того, чтоб эта модель переопределила auth_user, нужно не только указать информацию в admin.py и apps.py приложения "users",
-# но и зарегистрировать переопределение в главном приложении в файле sttings.py  строкой AUTH_USER_MODEL = 'users.User'
 class User(AbstractUser):
     phone_regex = RegexValidator(
         regex=r"^\+?1?\d{9,15}$",

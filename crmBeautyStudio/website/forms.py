@@ -12,3 +12,4 @@ class ServiceForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
