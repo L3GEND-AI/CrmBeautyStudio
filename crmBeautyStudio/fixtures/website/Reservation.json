@@ -1,0 +1,57 @@
+[
+    {
+        "model": "website.reservation",
+        "pk": 1,
+        "fields": {
+            "time_reservation": "10:00:00",
+            "date_reservation": "2024-05-19",
+            "id_service": 14,
+            "id_user": 5,
+            "feedback": null,
+            "wishes": null,
+            "status": "Выполнено"
+        }
+    },
+
+    {
+        "model": "website.reservation",
+        "pk": 2,
+        "fields": {
+            "time_reservation": "10:00:00",
+            "date_reservation": "2024-05-19",
+            "id_service": 14,
+            "id_user": 8,
+            "feedback": null,
+            "wishes": null,
+            "status": "Выполнено"
+        }
+    },
+
+    {
+        "model": "website.reservation",
+        "pk": 3,
+        "fields": {
+            "time_reservation": "10:00:00",
+            "date_reservation": "2024-05-19",
+            "id_service": 14,
+            "id_user": 6,
+            "feedback": null,
+            "wishes": null,
+            "status": "Выполнено"
+        }
+    },
+
+    {
+        "model": "website.reservation",
+        "pk": 4,
+        "fields": {
+            "time_reservation": "10:00:00",
+            "date_reservation": "2024-05-19",
+            "id_service": 14,
+            "id_user": 7,
+            "feedback": null,
+            "wishes": null,
+            "status": "Выполнено"
+        }
+    }
+]
