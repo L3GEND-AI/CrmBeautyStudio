@@ -2,61 +2,137 @@
 {% load static %}
 
 {% block content %}
-<main class="homepage container d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 80vh;">
+<main class="homepage container">
     {% if user.is_authenticated %}
-        <h1 class="display-4" style="color: #657BB5;">Добро пожаловать, {{ user.first_name }}!</h1>
-        <p class="lead" style="color: #8E8FBF;">Вы можете использовать меню для навигации по сайту.</p>
+        <div class="welcome-section text-center mt-5">
+            <h1 class="display-4" style="color: #657BB5;">Добро пожаловать, {{ user.first_name }}!</h1>
+            <p class="lead" style="color: #8E8FBF;">Вы можете использовать меню для навигации по сайту.</p>
+        </div>
 
-        <div class="row mt-4 w-100">
-            <div class="col-md-6 mb-3">
-                <div class="card shadow" style="border-radius: 15px;">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card shadow">
                     <div class="card-body text-center">
                         <h5 class="card-title" style="color: #657BB5;">Общее количество клиентов</h5>
                         <p class="card-text" style="font-size: 24px;">{{ user_count }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
-                <div class="card shadow" style="border-radius: 15px;">
+            <div class="col-md-4">
+                <div class="card shadow">
                     <div class="card-body text-center">
                         <h5 class="card-title" style="color: #657BB5;">Записи на текущий день</h5>
                         <p class="card-text" style="font-size: 24px;">{{ today_reservations.count }}</p>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" style="color: #657BB5;">Процент заполненности</h5>
+                        <p class="card-text" style="font-size: 24px;">{{ occupancy_percentage }}%</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="row mt-4 w-100">
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #657BB5;">График записей на неделю</h5>
+                        <canvas id="weeklyReservationsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #657BB5;">Последние отзывы клиентов</h5>
+                        <ul class="list-group">
+                            {% for feedback in recent_feedbacks %}
+                                <li class="list-group-item">{{ feedback }}</li>
+                            {% empty %}
+                                <li class="list-group-item">Отзывов пока нет</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
             <div class="col-12">
-                <h2 class="mb-4" style="color: #657BB5;">Записи на сегодня</h2>
-                <table class="table table-striped table-hover custom-table">
-                    <thead class="custom-thead">
-                        <tr>
-                            <th scope="col">Клиент</th>
-                            <th scope="col">Время</th>
-                            <th scope="col">Услуга</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for reservation in today_reservations %}
-                            <tr>
-                                <td>{{ reservation.id_user.first_name }} {{ reservation.id_user.last_name }}</td>
-                                <td>{{ reservation.time_reservation|date:"H:i" }}</td>
-                                <td>{{ reservation.id_service.name_service }}</td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="3">Записей на сегодня нет</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4" style="color: #657BB5;">Записи на сегодня</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover custom-table">
+                                <thead class="custom-thead">
+                                    <tr>
+                                        <th scope="col">Клиент</th>
+                                        <th scope="col">Время</th>
+                                        <th scope="col">Услуга</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for reservation in today_reservations %}
+                                        <tr>
+                                            <td>{{ reservation.id_user.first_name }} {{ reservation.id_user.last_name }}</td>
+                                            <td>{{ reservation.time_reservation|date:"H:i" }}</td>
+                                            <td>{{ reservation.id_service.name_service }}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="3">Записей на сегодня нет</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     {% else %}
-        <h1 class="display-4" style="color: #657BB5;">Добро пожаловать в систему управления клиентами студии красоты "Я&Ты"</h1>
-        <p class="lead" style="color: #8E8FBF;">Пожалуйста авторизуйтесь для просмотра этой страницы</p>
-        <a class="btn btn-primary mt-3" href="{% url 'login' %}" style="background-color: #657BB5; border-color: #657BB5;">Войти</a>
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <h1 class="display-4" style="color: #657BB5;">Добро пожаловать в систему управления клиентами студии красоты "Я&Ты"</h1>
+                <p class="lead" style="color: #8E8FBF;">Пожалуйста авторизуйтесь для просмотра этой страницы</p>
+                <a class="btn btn-primary mt-3" href="{% url 'login' %}">Войти</a>
+            </div>
+        </div>
     {% endif %}
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('weeklyReservationsChart').getContext('2d');
+    var weeklyReservationsChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ weekly_reservations_labels|safe }},
+            datasets: [{
+                label: 'Записи',
+                data: {{ weekly_reservations_data|safe }},
+                backgroundColor: 'rgba(101, 123, 181, 0.2)',
+                borderColor: 'rgba(101, 123, 181, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
 {% endblock content %}
