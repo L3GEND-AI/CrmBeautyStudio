@@ -1,16 +1,24 @@
 from django.http import JsonResponse
+from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import ServiceForm
-from .models import User
+from .models import Reservation, User
 from .models import Services
 
 
 def home(request):
-    context: dict[str, str] = {"title": "Я&Ты - Главная"}
-    return render(request, "website/home.html")
+    current_date = timezone.now().date()
+    user_count = User.objects.filter(is_staff=False).count()
+    today_reservations = Reservation.objects.filter(date_reservation=current_date)
+    context = {
+        "title": "Я&Ты - Главная",
+        "user_count": user_count,
+        "today_reservations": today_reservations,
+    }
+    return render(request, "website/home.html", context)
 
 
 def loginuser(request):
@@ -39,21 +47,16 @@ def logoutuser(request):
 
 @login_required
 def clientsList(request):
-    users = User.objects.all()
-    user_count = User.objects.count()
+    users = User.objects.filter(is_staff=False)
+    user_count = users.count()
     return render(request, "website/clients.html", {"users": users, 'user_count': user_count})
 
 @login_required
 def record(request, pk):
-    if request.user.is_authenticated:
-        record = get_object_or_404(User, pk=pk)
-        print(f"Record found: {record}, ID: {record.id}") #debug
-        return render(request, "website/record.html", {"record": record})
-    else:
-        messages.error(
-            request, "Вы должны авторизоваться для просмотра данной страницы"
-        )
-        return redirect("home")
+    user = get_object_or_404(User, pk=pk)
+    reservations = Reservation.objects.filter(id_user=user)
+    return render(request, "website/record.html", {"record": user, "reservations": reservations})
+
 
 @login_required
 def profile(request):
@@ -61,7 +64,7 @@ def profile(request):
 
 @login_required
 def servicesList(request):
-    services = Services.objects.all()
+    services = Services.objects.filter(available=True)
     return render(request, "website/services.html", {"services": services})
 
 @login_required
@@ -98,3 +101,10 @@ def delete_service(request, pk):
     service = get_object_or_404(Services, pk=pk)
     service.delete()
     return redirect("services")
+
+@login_required
+def toggle_service_availability(request, pk):
+    service = get_object_or_404(Services, pk=pk)
+    service.available = not service.available
+    service.save()
+    return JsonResponse({'status': 'success', 'available': service.available})

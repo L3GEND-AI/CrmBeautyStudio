@@ -9,11 +9,15 @@
             <p class="card-text"><strong>Цена:</strong> {{ service.price }} ₽</p>
             <p class="card-text"><strong>Категория:</strong> {{ service.category_service.name_category }}</p>
             <p class="card-text"><strong>Описание:</strong> {{ service.description }}</p>
+            <p class="card-text"><strong>Статус:</strong> <span id="service-status">{{ service.available|yesno:"Доступна,Недоступна" }}</span></p>
         </div>
     </div>
     <a href="{% url 'edit_service' service.pk %}" class="btn btn-secondary">Редактировать</a>
-    <a href="{% url 'services' %}" class="btn btn-primary">Назад</a>
+    <button type="button" class="btn btn-warning" id="toggle-availability-btn" data-service-id="{{ service.id }}">
+      {% if service.available %}Сделать недоступной{% else %}Сделать доступной{% endif %}
+    </button>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteServiceModal">Удалить</button>
+    <a href="{% url 'services' %}" class="btn btn-primary">Назад</a>
 </div>
 
 <!-- Модальное окно подтверждения удаления -->
@@ -34,4 +38,32 @@
     </div>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#toggle-availability-btn').click(function() {
+            var serviceId = $(this).data('service-id');
+            var csrfToken = '{{ csrf_token }}';
+
+            $.ajax({
+                url: '{% url 'toggle_service_availability' service.pk %}',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': csrfToken
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var newStatus = response.available ? 'Доступна' : 'Недоступна';
+                        $('#service-status').text(newStatus);
+                        $('#toggle-availability-btn').text(response.available ? 'Сделать недоступной' : 'Сделать доступной');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Ошибка изменения статуса услуги');
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}
