@@ -1,3 +1,4 @@
+/* Шрифты */
 @font-face {
     font-family: "Comfortaa-Light";
     src: url("../fonts/Comfortaa-Light.ttf");
@@ -10,6 +11,8 @@
     font-family: "MontserratAlternates-Regular.ttf";
     src: url("../fonts/MontserratAlternates-Regular.ttf");
 }
+
+/* Конец шрифтов */
 
 /* ul{
     margin: 0;
@@ -228,7 +231,7 @@ body{
 
 .p-client-count{
     font-family: 'Comfortaa-Regular';
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .navigation_item{
@@ -256,6 +259,14 @@ body{
 h1{
     font-family: 'Comfortaa-Regular', sans-serif;
     color: #657BB5;
+}
+
+h2{
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
+h5{
+    font-family: 'Comfortaa-Regular', sans-serif;
 }
 
 p{
@@ -309,6 +320,9 @@ p{
 .bg-white {
     border-radius: 15px;
 }
+.alert {
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
 
 /* Конец логина */
 
@@ -336,7 +350,7 @@ p{
     margin-top: 50px;
     animation: fadeIn 1s ease-in-out;
 }
-.btn-primary, .btn-secondary, .btn-danger {
+.btn-primary, .btn-secondary, .btn-danger, .btn-warning {
     font-family: 'Comfortaa-Regular', sans-serif;
     border-radius: 20px;
     padding: 0.75rem 1.5rem;
@@ -358,6 +372,23 @@ p{
 
 /* Конец домашней */
 
+.btn-custom {
+    background-color: #657BB5; /* Основной цвет */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Comfortaa-Regular', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #8E8FBF; /* Цвет при наведении */
+    color: white;
+}
+
 .main-text{
     font-size: 50px;
     font-family: MontserratAlternates-Regular;
@@ -367,26 +398,28 @@ p{
     text-align: center;
 }
 
-.navigation-links {
-    justify-content: space-around;
-    align-items: center;
+.btn-custom {
+    background-color: #657BB5; /* Основной цвет */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Comfortaa-Regular', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Добавлен отступ справа */
 }
 
-.navigation {
-    background-color: #677CB5;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.btn-custom:hover {
+    background-color: #8E8FBF; /* Цвет при наведении */
+    color: white;
 }
 
-.inputs{
-    font-family: Comfortaa-Regular;
-    width: 400px;
-    height: 30px;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+.button-group .btn {
+    margin-right: 10px; /* Отступ между кнопками */
 }
 
+.button-group .btn:last-child {
+    margin-right: 0; /* Убирает отступ у последней кнопки */
+}
