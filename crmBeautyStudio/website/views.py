@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -79,3 +80,21 @@ def edit_service(request, pk):
     else:
         form = ServiceForm(instance=service)
     return render(request, 'website/edit_service.html', {'form': form, 'service': service})
+
+@login_required
+def create_service(request):
+    if request.method == "POST":
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('services')
+    else:
+        form = ServiceForm()
+
+    return render(request, 'website/create_service.html', {'form': form})
+
+@login_required
+def delete_service(request, pk):
+    service = get_object_or_404(Services, pk=pk)
+    service.delete()
+    return redirect("services")
