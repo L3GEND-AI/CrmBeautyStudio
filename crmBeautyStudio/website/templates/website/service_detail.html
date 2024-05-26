@@ -13,5 +13,25 @@
     </div>
     <a href="{% url 'edit_service' service.pk %}" class="btn btn-secondary">Редактировать</a>
     <a href="{% url 'services' %}" class="btn btn-primary">Назад</a>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteServiceModal">Удалить</button>
+</div>
+
+<!-- Модальное окно подтверждения удаления -->
+<div class="modal fade" id="deleteServiceModal" tabindex="-1" aria-labelledby="deleteServiceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteServiceModalLabel">Подтвердите удаление</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Вы уверены, что хотите удалить эту услугу?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        <a href="{% url 'delete_service' service.pk %}" class="btn btn-danger">Удалить</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
