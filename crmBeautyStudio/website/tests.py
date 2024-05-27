@@ -36,7 +36,7 @@ class ClientsListViewTest(TestCase):
         self.assertNotContains(response, self.user2.username)
         self.assertNotContains(response, self.user2.email)
 
-""" class ServiceCreationTest(TestCase):
+class ServiceCreationTest(TestCase):
 
     print("Тест создания услуги")
 
@@ -80,4 +80,3 @@ class ClientsListViewTest(TestCase):
         self.assertEqual(service.category_service, self.category)
         self.assertEqual(service.description, 'Test Description')
         self.assertEqual(service.slug, 'test-service')
- """
