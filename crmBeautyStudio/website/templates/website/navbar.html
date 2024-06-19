@@ -11,21 +11,27 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'clients' %}"><i class="fas fa-users"></i>Клиенты</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'services' %}"><i class="fas fa-concierge-bell"></i>Услуги</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_list' %}"><i class="fas fa-regular fa-newspaper"></i></i>Блог</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "profile" %}"><i class="fas fa-user"></i>Профиль</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Выйти</a>
-          </li>
+          {% if user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'clients' %}"><i class="fas fa-users"></i> Клиенты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'services' %}"><i class="fas fa-concierge-bell"></i> Услуги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'news_list' %}"><i class="fas fa-regular fa-newspaper"></i> Блог</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user"></i> Профиль</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+            </li>
+          {% endif %}
         {% endif %}
       </ul>
     </div>
