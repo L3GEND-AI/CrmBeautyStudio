@@ -14,6 +14,10 @@
 
 /* Конец шрифтов */
 
+*{
+    font-family: 'Comfortaa-Regular', sans-serif;
+}
+
 body {
     background-image: url("../img/background2.svg");
     background-size: cover;
@@ -184,7 +188,7 @@ body {
 }
 .alert-custom-error {
     background-color: #D8CFE2;
-    color: #CDCFE7;
+    color: #657BB5;
     border-color: #8E8FBF;
 }
 .alert-custom-info {
