@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <h2 class="card-title mb-4" style="color: #657BB5;">Записи на сегодня</h2>
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover custom-table">
+                            <table class="table custom-table">
                                 <thead class="custom-thead">
                                     <tr>
                                         <th scope="col">Клиент</th>
@@ -78,9 +78,9 @@
                                 <tbody>
                                     {% for reservation in today_reservations %}
                                         <tr>
-                                            <td>{{ reservation.id_user.first_name }} {{ reservation.id_user.last_name }}</td>
-                                            <td>{{ reservation.time_reservation|date:"H:i" }}</td>
-                                            <td>{{ reservation.id_service.name_service }}</td>
+                                            <td data-label="Клиент">{{ reservation.id_user.first_name }} {{ reservation.id_user.last_name }}</td>
+                                            <td data-label="Время">{{ reservation.time_reservation|date:"H:i" }}</td>
+                                            <td data-label="Услуга">{{ reservation.id_service.name_service }}</td>
                                         </tr>
                                     {% empty %}
                                         <tr>

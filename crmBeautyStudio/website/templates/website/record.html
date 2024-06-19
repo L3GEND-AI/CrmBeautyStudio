@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="profile-header text-center mb-5">
-        <h1 class="mt-3">{{ record.first_name }} {{ record.last_name }}</h1>
+        <h1 class="mt-3" style="color: #657BB5;">{{ record.first_name }} {{ record.last_name }}</h1>
         <p class="lead">{{ record.email }}</p>
     </div>
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card mb-4" style="border-radius: 20px;">
+            <div class="card mb-4 shadow" style="border-radius: 20px;">
                 <div class="card-body">
                     <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;"><i class="fas fa-user"></i> Личная информация</h5>
                     <p class="card-text"><strong>Имя:</strong> {{ record.first_name }}</p>
@@ -21,37 +21,37 @@
                 </div>
             </div>
 
-            <div class="card mb-4" style="border-radius: 20px;">
+            <div class="card mb-4 shadow" style="border-radius: 20px;">
                 <div class="card-body">
                     <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;"><i class="fas fa-percentage"></i> Скидки</h5>
                     <p class="card-text"><strong>Накопительная скидка:</strong> {{ record.discount }}%</p>
                 </div>
             </div>
 
-            <div class="card mb-4" style="border-radius: 20px;">
+            <div class="card mb-4 shadow" style="border-radius: 20px;">
                 <div class="card-body">
                     <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;"><i class="fas fa-calendar-alt"></i> Записи</h5>
                     {% if reservations %}
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Дата</th>
-                                    <th scope="col">Время</th>
-                                    <th scope="col">Услуга</th>
-                                    <th scope="col">Статус</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for reservation in reservations %}
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="custom-thead">
                                     <tr>
-                                        <td>{{ reservation.date_reservation|date:"d.m.Y" }}</td>
-                                        <td>{{ reservation.time_reservation|time:"H:i" }}</td>
-                                        <td>{{ reservation.id_service.name_service }}</td>
-                                        <td>{{ reservation.status }}</td>
+                                        <th scope="col">Дата</th>
+                                        <th scope="col">Время</th>
+                                        <th scope="col">Услуга</th>
                                     </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {% for reservation in reservations %}
+                                        <tr>
+                                            <td data-label="Дата">{{ reservation.date_reservation|date:"d.m.Y" }}</td>
+                                            <td data-label="Время">{{ reservation.time_reservation|time:"H:i" }}</td>
+                                            <td data-label="Услуга">{{ reservation.id_service.name_service }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     {% else %}
                         <p class="card-text">Нет записей.</p>
                     {% endif %}
