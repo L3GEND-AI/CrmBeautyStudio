@@ -10,24 +10,24 @@
         </div>
 
         <div class="row mt-5">
-            <div class="col-md-4">
-                <div class="card shadow">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow custom-card">
                     <div class="card-body text-center">
                         <h5 class="card-title" style="color: #657BB5;">Общее количество клиентов</h5>
                         <p class="card-text" style="font-size: 24px;">{{ user_count }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow custom-card">
                     <div class="card-body text-center">
                         <h5 class="card-title" style="color: #657BB5;">Записи на текущий день</h5>
                         <p class="card-text" style="font-size: 24px;">{{ today_reservations.count }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow">
+            <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
+                <div class="card shadow custom-card">
                     <div class="card-body text-center">
                         <h5 class="card-title" style="color: #657BB5;">Процент заполненности</h5>
                         <p class="card-text" style="font-size: 24px;">{{ occupancy_percentage }}%</p>
@@ -37,16 +37,16 @@
         </div>
 
         <div class="row mt-5">
-            <div class="col-md-6">
-                <div class="card shadow">
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="card shadow custom-card">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #657BB5;">График записей на неделю</h5>
                         <canvas id="weeklyReservationsChart"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card shadow">
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="card shadow custom-card">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #657BB5;">Последние отзывы клиентов</h5>
                         <ul class="list-group">
@@ -62,8 +62,8 @@
         </div>
 
         <div class="row mt-5">
-            <div class="col-12">
-                <div class="card shadow">
+            <div class="col-12 mb-4">
+                <div class="card shadow custom-card">
                     <div class="card-body">
                         <h2 class="card-title mb-4" style="color: #657BB5;">Записи на сегодня</h2>
                         <div class="table-responsive">
@@ -133,6 +133,4 @@
         }
     });
 </script>
-
-
 {% endblock content %}
