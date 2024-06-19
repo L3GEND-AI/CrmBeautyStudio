@@ -30,6 +30,9 @@ urlpatterns = [
     path('news/edit/<int:id>/', views.edit_news, name='edit_news'),
     path('news/<int:id>/delete/', views.delete_news, name='delete_news'),
 
-
-    #Пути для галереи
+    #Пути для админа
+    path('staff/', views.staff_list, name='staff_list'),
+    path('staff/register/', views.register_staff, name='register_staff'),
+    path('staff/edit/<int:pk>/', views.edit_staff, name='edit_staff'),
+    path('staff/delete/<int:pk>/', views.delete_staff, name='delete_staff'),
 ]
