@@ -1,65 +1,60 @@
 {% extends "website/base.html" %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <h1 class="mb-4">Клиенты</h1>
+        </div>
+        <div class="col-auto">
+          <div class="p-client-count"><i class="fas fa-users"></i> Общее количество пользователей: <strong>{{ user_count }}</strong></div>
+        </div>
+      </div>
 
-{% if user.is_authenticated %}
-
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="mb-4">Клиенты</h1>
-        <p class="mb-4 p-client-count">Общее количество пользователей: <strong>{{ user_count }}</strong></p>
-    </div>
-
-  <table class="table table-striped table-hover custom-table" id="clients-table">
-      <thead class="custom-thead">
-          <tr>
-              <th scope="col">ID</th>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover custom-table" id="clients-table">
+          <thead class="custom-thead">
+            <tr>
               <th scope="col">Имя</th>
               <th scope="col">Фамилия</th>
-              <th scope="col">Почта</th>
               <th scope="col">Номер телефона</th>
               <th scope="col">Процент скидки</th>
-              <th scope="col">Дата регистрации</th>
-          </tr>
-      </thead>
-      <tbody>
-          {% for user in users %}
-              <tr class="client-row" data-url="{% url 'record' user.id %}">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.first_name }}</td>
-                  <td>{{ user.last_name }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.PhoneNumber }}</td>
-                  <td>{{ user.discount }}%</td>
-                  <td>{{ user.date_joined|date:"d.m.Y" }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+              <tr class="client-row" onclick="window.location='{% url 'record' user.id %}'" style="cursor:pointer;">
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.PhoneNumber }}</td>
+                <td>{{ user.discount }}%</td>
               </tr>
-          {% endfor %}
-      </tbody>
-  </table>
-</div>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-<script>
-  // Получаем все строки таблицы клиентов
-  const clientRows = document.querySelectorAll('.client-row');
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const clientsTable = document.getElementById('clients-table');
 
-  // Для каждой строки таблицы добавляем обработчик события клика
-  clientRows.forEach(row => {
-      row.addEventListener('click', () => {
-          // Получаем URL клиента из атрибута data-url
-          const clientUrl = row.getAttribute('data-url');
-
-          // Перенаправляем пользователя на страницу с подробной информацией о клиенте
-          window.location.href = clientUrl;
+        clientsTable.addEventListener('click', function(event) {
+          const target = event.target.closest('.client-row');
+          if (target) {
+            const clientUrl = target.getAttribute('data-url');
+            if (clientUrl) {
+              window.location.href = clientUrl;
+            }
+          }
+        });
       });
-  });
-</script>
+    </script>
 
-{% else %}
-
-<div class="container mt-5">
-    <p class="">Авторизуйтесь для просмотра данной страницы</p>
-</div>
-
-{% endif %}
-
+  {% else %}
+    <div class="container mt-5">
+      <p>Авторизуйтесь для просмотра данной страницы</p>
+    </div>
+  {% endif %}
 {% endblock content %}
