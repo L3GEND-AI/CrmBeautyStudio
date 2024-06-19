@@ -7,14 +7,14 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .forms import ServiceForm, BlognewsForm, UserEditForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .forms import ServiceForm, BlognewsForm, UserEditForm, StaffChangeForm, StaffCreationForm
 from .models import Reservation, User, Services, Blognews
 
 
 def home(request):
     # Количество клиентов
-    user_count = User.objects.filter(is_staff=False).count()
+    user_count = User.objects.filter(is_staff=False, is_superuser=False).count()
 
     # Записи на текущий день
     today = date.today()
@@ -45,41 +45,63 @@ def home(request):
     }
     return render(request, "website/home.html", context)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def staff_list(request):
+    staff_list = User.objects.filter(is_staff=True)
+    return render(request, 'website/staff_list.html', {'staff_list': staff_list})
 
-def loginuser(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            if user.is_staff:
-                login(request, user)
-                messages.success(request, "Вы успешно вошли в систему")
-                return redirect("home")
-            else:
-                messages.error(request, "Доступ разрешен только сотрудникам.")
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def register_staff(request):
+    if request.method == 'POST':
+        form = StaffCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Сотрудник успешно зарегистрирован')
+            return redirect('staff_list')
         else:
-            messages.error(request, "Возникла ошибка при входе. Проверьте введенные данные.")
-    return render(request, "website/login.html")
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = StaffCreationForm()
+    return render(request, 'website/register_staff.html', {'form': form})
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def edit_staff(request, pk):
+    staff = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = StaffChangeForm(request.POST, instance=staff)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Сотрудник успешно обновлен')
+            return redirect('staff_list')
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = StaffChangeForm(instance=staff)
+    return render(request, 'website/edit_staff.html', {'form': form})
 
-def logoutuser(request):
-    logout(request)
-    messages.success(request, "Вы успешно вышли из системы.")
-    return redirect("home")
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def delete_staff(request, pk):
+    staff = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        staff.delete()
+        messages.success(request, 'Сотрудник успешно удален')
+        return redirect('staff_list')
+    return render(request, 'website/staff_list.html')
 
 @login_required
 def clientsList(request):
-    users = User.objects.filter(is_staff=False)
+    users = User.objects.filter(is_staff=False, is_superuser=False)
     user_count = users.count()
     return render(request, "website/clients.html", {"users": users, 'user_count': user_count})
 
 @login_required
 def record(request, pk):
     user = get_object_or_404(User, pk=pk)
-    
+
     # Получаем последние 3 записи пользователя, отсортированные по возрастанию даты и времени
     reservations = Reservation.objects.filter(id_user=user).order_by('date_reservation', 'time_reservation')[:3]
 
@@ -246,3 +268,28 @@ def delete_news(request, id):
         messages.error(request, 'Не удалось удалить новость.')
         return redirect('news_detail', id=id)
 #Конец блога
+
+def loginuser(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Вы успешно вошли в систему")
+            if user.is_superuser:
+                return redirect("staff_list")
+            elif user.is_staff:
+                return redirect("home")
+        else:
+            messages.error(request, "Возникла ошибка при входе. Проверьте введенные данные.")
+    return render(request, "website/login.html")
+
+
+
+def logoutuser(request):
+    logout(request)
+    messages.success(request, "Вы успешно вышли из системы.")
+    return redirect("home")
