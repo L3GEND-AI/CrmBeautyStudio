@@ -1,0 +1,87 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="mb-4" style="color: #657BB5;">Сотрудники</h1>
+        </div>
+        <div class="col-auto">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="{% url 'register_staff' %}" class="btn btn-primary">Добавить сотрудника</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table custom-table" id="staff-table">
+            <thead class="custom-thead">
+                <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staff_list %}
+                <tr class="staff-row">
+                    <td data-label="Имя">{{ staff.first_name }}</td>
+                    <td data-label="Фамилия">{{ staff.last_name }}</td>
+                    <td data-label="Email">{{ staff.email }}</td>
+                    <td data-label="Действия" class="actions-cell">
+                        <a href="{% url 'edit_staff' pk=staff.pk %}" class="btn btn-secondary btn-sm action-btn">Редактировать</a>
+                        <button type="button" class="btn btn-danger btn-sm action-btn" data-bs-toggle="modal" data-bs-target="#deleteStaffModal{{ staff.pk }}">Удалить</button>
+
+                        <!-- Модальное окно подтверждения удаления -->
+                        <div class="modal fade" id="deleteStaffModal{{ staff.pk }}" tabindex="-1" aria-labelledby="deleteStaffModalLabel{{ staff.pk }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteStaffModalLabel{{ staff.pk }}">Подтверждение удаления</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Вы уверены, что хотите удалить этого сотрудника?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                        <form method="post" action="{% url 'delete_staff' pk=staff.pk %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Удалить</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const staffTable = document.getElementById('staff-table');
+
+        staffTable.addEventListener('click', function(event) {
+            const target = event.target.closest('.staff-row');
+            if (target) {
+                const staffUrl = target.getAttribute('data-url');
+                if (staffUrl) {
+                    window.location.href = staffUrl;
+                }
+            }
+        });
+    });
+</script>
+
+{% else %}
+<div class="container mt-5 mb-5">
+    <p>У вас нет прав для просмотра этой страницы.</p>
+</div>
+{% endif %}
+{% endblock content %}
