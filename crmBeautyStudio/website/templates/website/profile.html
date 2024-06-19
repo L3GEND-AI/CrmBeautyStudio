@@ -7,13 +7,16 @@
     <div class="profile-header text-center mb-5">
         <h1 class="mt-3">{{ user.first_name }} {{ user.last_name }}</h1>
         <p class="lead">{{ user.email }}</p>
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Редактировать профиль</a>
     </div>
 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card mb-4" style="border-radius: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;"><i class="fas fa-user"></i> Личная информация</h5>
+                    <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;">
+                        <i class="fas fa-user"></i> Личная информация
+                    </h5>
                     <p class="card-text"><strong>Имя:</strong> {{ user.first_name }}</p>
                     <p class="card-text"><strong>Фамилия:</strong> {{ user.last_name }}</p>
                     <p class="card-text"><strong>Почта:</strong> {{ user.email }}</p>
@@ -24,7 +27,29 @@
 
             <div class="card mb-4" style="border-radius: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;"><i class="fas fa-percentage"></i> Скидки</h5>
+                    <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;">
+                        <i class="fas fa-history"></i> Последние действия
+                    </h5>
+                    {% if user_actions %}
+                    <ul class="list-group">
+                        {% for action in user_actions %}
+                        <li class="list-group-item">
+                            {{ action.description }}
+                            <small class="text-muted">{{ action.timestamp }}</small>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="card-text">Нет последних действий</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card mb-4" style="border-radius: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;">
+                        <i class="fas fa-percentage"></i> Скидки
+                    </h5>
                     <p class="card-text"><strong>Накопительная скидка:</strong> {{ user.discount }}%</p>
                 </div>
             </div>
