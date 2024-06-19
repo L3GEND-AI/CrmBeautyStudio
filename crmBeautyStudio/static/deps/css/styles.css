@@ -14,14 +14,14 @@
 
 /* Конец шрифтов */
 
-body{
+body {
     background-image: url("../img/background2.svg");
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center center;
     min-height: 100vh;
     margin: 0;
 }
+
 
 /* Таблицы */
 
@@ -37,6 +37,7 @@ body{
 .custom-table th,
 .custom-table td {
     border: 1px solid #D8CFE2;
+    padding: 8px;
     font-family: 'Comfortaa-Regular', sans-serif;
 }
 
@@ -78,7 +79,49 @@ body{
     overflow: auto;
 }
 
-/* Конец стилей таблицы */
+/* Адаптивность таблиц для мобильных устройств */
+@media (max-width: 768px) {
+    .custom-table, .custom-table thead, .custom-table tbody, .custom-table th, .custom-table td, .custom-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .custom-table tr {
+        margin-bottom: 15px;
+    }
+
+    .custom-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .custom-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    .custom-table th {
+        display: none;
+    }
+
+    .custom-table tbody tr {
+        border-top: 1px solid #8E8FBF;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .custom-table tbody tr:first-child {
+        border-top: none;
+    }
+}
+
+/* Конец таблиц */
 
 /* Навбар */
 
@@ -326,14 +369,65 @@ p{
     background-color: #8E8FBF;
     border-color: #8E8FBF;
 }
+
+.btn-secondary{
+    background-color: #CDCFE7;
+    border-color: #CDCFE7;
+}
+
 .btn-secondary:hover {
     background-color: #657BB5;
     border-color: #657BB5;
 }
 
-.btn-danger:hover{
+.btn-warning{
+    background-color: #8E8FBF;
+    border-color: #8E8FBF;
+    color: white;
+}
+
+.btn-warning:hover{
+    background-color: #CDCFE7;
+    border-color: #D8CFE2;
+}
+
+.btn-danger{
     background-color: #C7ADD0;
     border-color: #C7ADD0;
+}
+
+.btn-danger:hover{
+    background-color: #D8CFE2;
+    border-color: #D8CFE2;
+}
+
+/* Flexbox для кнопок */
+.btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-container .btn {
+    flex: 1 1 auto;
+    min-width: 150px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .btn-container {
+        flex-direction: column;
+    }
+
+    .btn-container .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn-container .btn:last-child {
+        margin-bottom: 0;
+    }
 }
 
 /* Конец домашней */
