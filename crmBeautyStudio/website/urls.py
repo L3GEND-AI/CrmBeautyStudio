@@ -11,7 +11,9 @@ urlpatterns = [
     path('clients/', views.clientsList, name='clients'),
     path('clients/record/<int:pk>/', views.record, name='record'),
 
+    #Пути для профиля
     path('profile/', views.profile, name='profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
 
     #Пути для сервисов
     path('services/', views.servicesList, name='services'),
@@ -20,4 +22,14 @@ urlpatterns = [
     path('service/create/', views.create_service, name='create_service'),
     path('services/delete/<int:pk>/', views.delete_service, name='delete_service'),
     path('services/toggle-availability/<int:pk>/', views.toggle_service_availability, name='toggle_service_availability'),
+
+    #Пути для блога
+    path('news/', views.news_list, name='news_list'),
+    path('news/<int:id>/', views.news_detail, name='news_detail'),
+    path('news/add/', views.add_news, name='add_news'),
+    path('news/edit/<int:id>/', views.edit_news, name='edit_news'),
+    path('news/<int:id>/delete/', views.delete_news, name='delete_news'),
+
+
+    #Пути для галереи
 ]
