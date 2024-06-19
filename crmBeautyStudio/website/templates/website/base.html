@@ -17,14 +17,36 @@
 
     {% include "website/navbar.html" %}
 
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-dismissible fade show alert-custom-{{ message.tags }}" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     {% block content %}
 
     {% endblock content %}
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(function() {
+              var alerts = document.querySelectorAll('.alert');
+              alerts.forEach(function(alert) {
+                  var alertInstance = new bootstrap.Alert(alert);
+                  alertInstance.close();
+              });
+          }, 5000);
+      });
+    </script>
 
     <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
     <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
-    <script src="{% static 'your_app/delete_service.js' %}"></script>
+    <script src="{% static 'deps/js/delete_service.js' %}"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

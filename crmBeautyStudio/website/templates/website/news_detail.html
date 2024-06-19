@@ -1,0 +1,48 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <h1 class="card-title mb-4 text-center">{{ news_item.tittle }}</h1>
+            {% if news_item.image %}
+                <img src="{{ news_item.image }}" class="img-fluid mb-4 rounded mx-auto d-block" alt="{{ news_item.tittle }}">
+            {% endif %}
+            <div class="card-text">
+                {{ news_item.maintext|linebreaksbr }}
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'edit_news' news_item.id %}" class="btn btn-primary">Редактировать</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Удалить
+                </button>
+                <a href="{% url 'news_list' %}" class="btn btn-secondary">Назад к новостям</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для подтверждения удаления -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Подтверждение удаления</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Вы уверены, что хотите удалить эту новость?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <form method="post" action="{% url 'delete_news' news_item.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
