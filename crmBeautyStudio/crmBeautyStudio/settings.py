@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SESSION_COOKIE_AGE = 15 * 60
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # Application definition
 
@@ -48,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'website.middleware.AutoLogoutMiddleware',
 ]
 
 ROOT_URLCONF = 'crmBeautyStudio.urls'

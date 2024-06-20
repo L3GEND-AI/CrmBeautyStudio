@@ -35,4 +35,6 @@ urlpatterns = [
     path('staff/register/', views.register_staff, name='register_staff'),
     path('staff/edit/<int:pk>/', views.edit_staff, name='edit_staff'),
     path('staff/delete/<int:pk>/', views.delete_staff, name='delete_staff'),
+
+    path('keep-alive/', views.keep_alive, name='keep_alive'),
 ]

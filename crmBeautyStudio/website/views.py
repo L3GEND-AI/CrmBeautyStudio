@@ -2,7 +2,7 @@ from time import localtime
 import pytz
 from datetime import date, datetime, timedelta
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate, login, logout
@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import ServiceForm, BlognewsForm, UserEditForm, StaffChangeForm, StaffCreationForm
 from .models import Reservation, User, Services, Blognews
 
+def keep_alive(request):
+    return HttpResponse("OK")
 
 def home(request):
     # Количество клиентов
