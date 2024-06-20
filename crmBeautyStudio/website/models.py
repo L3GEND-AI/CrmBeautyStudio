@@ -89,7 +89,6 @@ class User(AbstractUser):
         null=True,
         verbose_name="Скидка в %",
     )
-    lastenter = models.DateField(blank=True, null=True, verbose_name="Последний вход")
 
     class Meta:
 

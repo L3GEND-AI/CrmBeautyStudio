@@ -285,8 +285,9 @@ def loginuser(request):
                 return redirect("staff_list")
             elif user.is_staff:
                 return redirect("home")
-        else:
-            messages.error(request, "Возникла ошибка при входе. Проверьте введенные данные.")
+            else:
+                messages.error(request, "Данная страница доступна только сотрудникам.")
+                return render(request, "website/login.html")
     return render(request, "website/login.html")
 
 
