@@ -165,7 +165,7 @@ def edit_profile(request):
 
 @login_required
 def servicesList(request):
-    services = Services.objects.filter(available=True)
+    services = Services.objects.all()
     return render(request, "website/services.html", {"services": services})
 
 @login_required
