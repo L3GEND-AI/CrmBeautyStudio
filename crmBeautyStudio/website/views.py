@@ -14,6 +14,7 @@ from .models import Reservation, User, Services, Blognews
 def keep_alive(request):
     return HttpResponse("OK")
 
+
 def home(request):
     # Количество клиентов
     user_count = User.objects.filter(is_staff=False, is_superuser=False).count()
@@ -110,6 +111,7 @@ def record(request, pk):
     return render(request, "website/record.html", {"record": user, "reservations": reservations})
 
 #Профиль
+@login_required
 def log_user_action(request, action_description):
     user_actions = request.session.get('user_actions', [])
     user_actions.append({
@@ -279,15 +281,19 @@ def loginuser(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user)
-            messages.success(request, "Вы успешно вошли в систему")
-            if user.is_superuser:
-                return redirect("staff_list")
-            elif user.is_staff:
-                return redirect("home")
+            if user.is_superuser or user.is_staff:
+                login(request, user)
+                messages.success(request, "Вы успешно вошли в систему")
+                if user.is_superuser:
+                    return redirect("staff_list")
+                else:
+                    return redirect("home")
             else:
                 messages.error(request, "Данная страница доступна только сотрудникам.")
                 return render(request, "website/login.html")
+        else:
+            messages.error(request, "Неправильное имя пользователя или пароль.")
+
     return render(request, "website/login.html")
 
 
