@@ -11,6 +11,11 @@ urlpatterns = [
     path('clients/', views.clientsList, name='clients'),
     path('clients/record/<int:pk>/', views.record, name='record'),
 
+    #Пути для записей
+    path('update_reservation_status/<int:pk>/', views.update_reservation_status, name='update_reservation_status'),
+    path('all_reservations/', views.all_reservations, name='all_reservations'),
+    path('history/', views.history, name='history'),
+
     #Пути для профиля
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),

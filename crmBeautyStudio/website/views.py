@@ -1,4 +1,5 @@
 from time import localtime
+from django.urls import reverse
 import pytz
 from datetime import date, datetime, timedelta
 import json
@@ -94,6 +95,34 @@ def delete_staff(request, pk):
         messages.success(request, 'Сотрудник успешно удален')
         return redirect('staff_list')
     return render(request, 'website/staff_list.html')
+
+@login_required
+def all_reservations(request):
+    today = timezone.now().date()
+    end_date = today + timedelta(days=9)
+    reservations = Reservation.objects.filter(date_reservation__range=[today, end_date]).order_by('time_reservation')
+    context = {
+        'reservations': reservations,
+    }
+    return render(request, 'website/all_reservations.html', context)
+
+@login_required
+def history(request):
+    completed_reservations = Reservation.objects.filter(status__in=['Выполнено', 'Отменено']).order_by('-date_reservation', '-time_reservation')
+    context = {
+        'completed_reservations': completed_reservations,
+    }
+    return render(request, 'website/history.html', context)
+
+@login_required
+def update_reservation_status(request, pk):
+    reservation = get_object_or_404(Reservation, pk=pk)
+    if request.method == 'POST':
+        status = request.POST.get('status')
+        if status in ['Отменено', 'Выполнено']:
+            reservation.status = status
+            reservation.save()
+    return redirect(reverse('home') if 'home' in request.META.get('HTTP_REFERER', '') else reverse('all_reservations'))
 
 @login_required
 def clientsList(request):
