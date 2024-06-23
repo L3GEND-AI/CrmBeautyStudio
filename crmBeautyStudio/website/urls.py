@@ -13,6 +13,7 @@ urlpatterns = [
 
     #Пути для записей
     path('update_reservation_status/<int:pk>/', views.update_reservation_status, name='update_reservation_status'),
+    path('update-discount/<int:pk>/', views.update_discount, name='update_discount'),
     path('all_reservations/', views.all_reservations, name='all_reservations'),
     path('history/', views.history, name='history'),
 

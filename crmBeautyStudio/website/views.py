@@ -135,9 +135,22 @@ def record(request, pk):
     user = get_object_or_404(User, pk=pk)
 
     # Получаем последние 3 записи пользователя, отсортированные по возрастанию даты и времени
-    reservations = Reservation.objects.filter(id_user=user).order_by('date_reservation', 'time_reservation')[:3]
+    reservations = Reservation.objects.filter(id_user=user).order_by('date_reservation', 'time_reservation')
 
     return render(request, "website/record.html", {"record": user, "reservations": reservations})
+
+@login_required
+def update_discount(request, pk):
+    if request.method == "POST":
+        discount = request.POST.get('discount')
+        user = get_object_or_404(User, pk=pk)
+        if discount in ['5', '8', '10']:
+            user.discount = int(discount)
+            user.save()
+            messages.success(request, 'Скидка успешно обновлена.')
+        else:
+            messages.error(request, 'Неверное значение скидки.')
+    return redirect('record', pk=pk)
 
 #Профиль
 @login_required
