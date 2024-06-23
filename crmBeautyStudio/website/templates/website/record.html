@@ -25,6 +25,18 @@
                 <div class="card-body">
                     <h5 class="card-title" style="font-family: 'Comfortaa', sans-serif; color: #657BB5;"><i class="fas fa-percentage"></i> Скидки</h5>
                     <p class="card-text"><strong>Накопительная скидка:</strong> {{ record.discount }}%</p>
+                    <form method="post" action="{% url 'update_discount' record.pk %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="discount">Выберите скидку:</label>
+                            <select id="discount" name="discount" class="form-control">
+                                <option value="5">5%</option>
+                                <option value="8">8%</option>
+                                <option value="10">10%</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Установить скидку</button>
+                    </form>
                 </div>
             </div>
 
@@ -39,6 +51,7 @@
                                         <th scope="col">Дата</th>
                                         <th scope="col">Время</th>
                                         <th scope="col">Услуга</th>
+                                        <th scope="col">Статус</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,6 +60,7 @@
                                             <td data-label="Дата">{{ reservation.date_reservation|date:"d.m.Y" }}</td>
                                             <td data-label="Время">{{ reservation.time_reservation|time:"H:i" }}</td>
                                             <td data-label="Услуга">{{ reservation.id_service.name_service }}</td>
+                                            <td data-label="Статус">{{ reservation.status }}</td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
