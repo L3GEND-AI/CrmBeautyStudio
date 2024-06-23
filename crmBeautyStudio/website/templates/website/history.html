@@ -1,0 +1,46 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 style="color: #657BB5;">История выполненных и отмененных записей</h1>
+        <a href="{% url 'all_reservations' %}" class="btn btn-secondary action-btn" id="back-btn">Назад</a>
+    </div>
+
+    <div class="table-responsive mt-4">
+        <table class="table custom-table">
+            <thead class="custom-thead">
+                <tr>
+                    <th scope="col">Клиент</th>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Время</th>
+                    <th scope="col">Услуга</th>
+                    <th scope="col">Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in completed_reservations %}
+                    <tr>
+                        <td data-label="Клиент">{{ reservation.id_user.first_name }} {{ reservation.id_user.last_name }}</td>
+                        <td data-label="Дата">{{ reservation.date_reservation|date:"d.m.Y" }}</td>
+                        <td data-label="Время">{{ reservation.time_reservation|time:"H:i" }}</td>
+                        <td data-label="Услуга">{{ reservation.id_service.name_service }}</td>
+                        <td data-label="Статус">
+                            {% if reservation.status == "Выполнено" %}
+                                <span class="badge badge-success">Выполнено</span>
+                            {% elif reservation.status == "Отменено" %}
+                                <span class="badge badge-danger">Отменено</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Записей нет</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock content %}

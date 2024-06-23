@@ -3,14 +3,12 @@
 {% block content %}
 {% if user.is_authenticated and user.is_superuser %}
 <div class="container mt-5 mb-5">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col">
             <h1 class="mb-4" style="color: #657BB5;">Сотрудники</h1>
         </div>
         <div class="col-auto">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <a href="{% url 'register_staff' %}" class="btn btn-primary">Добавить сотрудника</a>
-            </div>
+            <a href="{% url 'register_staff' %}" class="btn btn-primary">Добавить сотрудника</a>
         </div>
     </div>
 
@@ -31,8 +29,15 @@
                     <td data-label="Фамилия">{{ staff.last_name }}</td>
                     <td data-label="Email">{{ staff.email }}</td>
                     <td data-label="Действия" class="actions-cell">
-                        <a href="{% url 'edit_staff' pk=staff.pk %}" class="btn btn-secondary btn-sm action-btn">Редактировать</a>
-                        <button type="button" class="btn btn-danger btn-sm action-btn" data-bs-toggle="modal" data-bs-target="#deleteStaffModal{{ staff.pk }}">Удалить</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle action-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                Действия
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'edit_staff' pk=staff.pk %}">Редактировать</a></li>
+                                <li><button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteStaffModal{{ staff.pk }}">Удалить</button></li>
+                            </ul>
+                        </div>
 
                         <!-- Модальное окно подтверждения удаления -->
                         <div class="modal fade" id="deleteStaffModal{{ staff.pk }}" tabindex="-1" aria-labelledby="deleteStaffModalLabel{{ staff.pk }}" aria-hidden="true">
